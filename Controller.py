@@ -13,5 +13,7 @@ class Controller:
         WindowIntro.close()
         WindowIntro.windowM = WindowMain()
 
+    def addButton(self, layout,lineName):
+        layout.addWidget(lineName)
 
         
