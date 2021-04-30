@@ -1,15 +1,10 @@
-# -*- coding: utf-8 -*-
+# -*- coding:utf-8 -*-
 """
 Created on Tue Apr 02 14:50:31 2021
 
 @author: Thomas
 """
 
-#=========== IMPORTATION ===========#
-
-
-
-#===================================#
 
 
 #============== MODEL ==============#
@@ -125,15 +120,15 @@ class Model:
                     compteur2 +=1
  
                 
-    def addSaveInterface(self,nomFichier,nomRouteur,text1,text2,text3,text4):
+    def addSaveInterface(self,nomFichier,nomRouteur,nomInterface,adresseIP,masque,passerelleDefaut):
         '''
         Paramètres : 
             - nomFichier (String) : nom du fichier où les informations seront enregistrées
             - nomRouteur (String) : nom du routeur
-            - text1 (String) : nom de l'interface
-            - text2 (String) : adresse IP de l'interface
-            - text3 (String) : masque de l'interface
-            - text4 (String) : passerelle par defaut de l'interface
+            - nomInterface (String) : nom de l'interface
+            - adresseIP (String) : adresse IP de l'interface
+            - masque (String) : masque de l'interface
+            - passerelleDefaut (String) : passerelle par defaut de l'interface
             
         But : Fonction permettant d'ajouter une interface.
         
@@ -150,8 +145,8 @@ class Model:
                 ligneSplit = [i for i in ligneSplit if i != '\n']
                
                 for i in range(len(ligneSplit)):
-                    ligneSplit[i] = ligneSplit[i].rstrip('\n')
-                ligneSplit.extend([text1,text2,text3,text4,"\n"])    
+                    ligneSplit[i] = ligneSplit[i].rstrip('\n')   
+                ligneSplit.extend([nomInterface,adresseIP,masque,passerelleDefaut+"\n"])    
                 nbLigne = compteur
                
             compteur += 1
@@ -166,7 +161,7 @@ class Model:
                 compteur2 +=1
 
                 
-    def editSaveInterface(self,nomFichier,nomRouteur,nomInterface,masque,adresseIP,passerelleDefaut):
+    def editSaveInterface(self,nomFichier,nomRouteur,nomInterface,adresseIP,masque,passerelleDefaut):
         '''
         Paramètres : 
             - nomFichier (String) : nom du fichier où les informations seront enregistrées
@@ -228,6 +223,22 @@ class Model:
                     return isCheck,nomRouteur,adresseIP,masque 
  
                           
+    def findInfoRouteur(self,nomFichier,nomRouteur):
+        '''
+        Paramètres : 
+            - nomFichier (String) : nom du fichier où les informations seront enregistrées
+            - nomRouteur (String) :  nom du routeur choisi
+            
+        But : Fonction permettant de retourner les informations d'un routeur passé en paramètre.
+        
+        Fonctionnement : Parcourir ligne par ligne le fichier passé en paramètre et retourner la ligne
+                         avec le nom du routeur passé lui aussi en paramètre.
+        '''        
+        with open(nomFichier,'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                if(line.split(',')[0] == nomRouteur):
+                    return line.split(',')
                            
                            
     def selectInterface(self,nomFichier,nomRouteur,items):
