@@ -11,6 +11,7 @@ import sys, csv, shutil
 from PyQt5.QtWidgets import (QLineEdit, QPushButton,
                              QApplication, QRadioButton,QTextEdit, QMenuBar, QFileDialog, QFormLayout, QAction, QWidget,QLabel)
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import QSize
 
 from Controller import Controller
 from Model import Model
@@ -51,19 +52,19 @@ class View(QWidget):
 
       
        # Création sous menu Ouvrir
-       ouvrirMenu = QAction(QIcon('open.svg'),'Ouvrir', self)
+       ouvrirMenu = QAction(QIcon('Logo\open.svg'),'Ouvrir', self)
        ouvrirMenu.setShortcut('Ctrl+O')
        ouvrirMenu.triggered.connect(lambda: self.openDb(self.myCtrl))
        self.menuFichier.addAction(ouvrirMenu)
 
        # Création sous menu Enregistrer
-       enregistrerMenu = QAction(QIcon('save.svg'),'Enregistrer sous', self)
+       enregistrerMenu = QAction(QIcon('Logo\save.svg'),'Enregistrer sous', self)
        enregistrerMenu.setShortcut('Ctrl+S')
        enregistrerMenu.triggered.connect(self.saveDb)
        self.menuFichier.addAction(enregistrerMenu)
 
        # Action sous menu Quitter
-       quitterMenu = QAction(QIcon('exit.svg'),'Quitter', self)
+       quitterMenu = QAction(QIcon('Logo\exit.svg'),'Quitter', self)
        quitterMenu.setShortcut('Ctrl+Q')
        quitterMenu.triggered.connect(app.quit)
        quitterMenu.triggered.connect(self.close)
@@ -82,7 +83,9 @@ class View(QWidget):
                    global compteur
                    if(len(row[0]) != 0) :
                        locals()['self.checkboxRouteur%d' % compteur] = QRadioButton(row[0])
-                       self.layout.addWidget(locals()['self.checkboxRouteur%d' % compteur])                       
+                       locals()['self.checkboxRouteur%d' % compteur].setIcon(QIcon('Logo\iconRouteur.svg'))
+                       self.layout.addWidget(locals()['self.checkboxRouteur%d' % compteur])  
+                       
                    compteur += 1
                except IndexError:
                    pass
@@ -90,9 +93,13 @@ class View(QWidget):
        
        # Création des boutons        
        self.buttonAdd = QPushButton("Ajouter un routeur")
+       self.buttonAdd.setIcon(QIcon('Logo\plus.svg'))
        self.buttonSelect = QPushButton("Voir le routeur")
+       self.buttonSelect.setIcon(QIcon('Logo\select.svg'))
        self.buttonDelete = QPushButton("Supprimer le routeur")
+       self.buttonDelete.setIcon(QIcon('Logo\delete.svg'))
        self.buttonEdit = QPushButton("Modifier le routeur")
+       self.buttonEdit.setIcon(QIcon('Logo\edit.svg'))
 
        # Ajout des widgets au layout et mise en place du layout    
        self.layout.addRow(self.buttonSelect,self.buttonEdit)
@@ -118,6 +125,7 @@ class View(QWidget):
        
        self.setWindowTitle("Accueil")
        self.show()
+       self.setGeometry(500, 200, 500, 200)
        
        
 
@@ -154,7 +162,9 @@ class View(QWidget):
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonSave = QPushButton("Ajouter le routeur")
+        self.buttonSave.setIcon(QIcon('Logo\plus.svg'))
         self.buttonCancel = QPushButton("Annuler")
+        self.buttonCancel.setIcon(QIcon('Logo\exit.svg'))
        
        
         # Gestion des events
@@ -205,8 +215,9 @@ class View(QWidget):
         self.layout.addRow(self.text3,self.le3)
       
         self.buttonSaveRouteur = QPushButton("Enregistrer")
+        self.buttonSaveRouteur.setIcon(QIcon('Logo\save.svg'))
         self.buttonCancelRouteur = QPushButton("Annuler")
-       
+        self.buttonCancelRouteur.setIcon(QIcon('Logo\exit.svg'))       
         self.layout.addRow(self.buttonSaveRouteur, self.buttonCancelRouteur)
        
         # Gestion des events
@@ -426,11 +437,17 @@ class View(QWidget):
         
         # Création des boutons
         self.buttonDeleteRoute = QPushButton("Supprimer une route")
+        self.buttonDeleteRoute.setIcon(QIcon('Logo\delete.svg'))   
         self.buttonAddRoute = QPushButton("Ajouter une route")
+        self.buttonAddRoute.setIcon(QIcon('Logo\plus.svg'))
         self.buttonAdd = QPushButton("Ajouter une interface")
+        self.buttonAdd.setIcon(QIcon('Logo\plus.svg'))
         self.buttonSelect = QPushButton("Voir l'interface")
+        self.buttonSelect.setIcon(QIcon('Logo\select.svg'))
         self.buttonDelete = QPushButton("Supprimer l'interface")
+        self.buttonDelete.setIcon(QIcon('Logo\delete.svg'))
         self.buttonBackHome = QPushButton("Revenir à l'accueil")
+        self.buttonBackHome.setIcon(QIcon('Logo\home.svg'))
 
         # Ajout des widgets au layout
         self.layout.addRow(self.tableRoutage)
@@ -498,8 +515,10 @@ class View(QWidget):
         self.layout.addRow(self.text4,self.le4)
        
         self.buttonSave = QPushButton("Ajouter l'interface")
+        self.buttonSave.setIcon(QIcon('Logo\plus.svg'))        
         self.buttonCancel = QPushButton("Annuler")
-       
+        self.buttonCancel.setIcon(QIcon('Logo\exit.svg'))
+        
         self.layout.addRow(self.buttonSave, self.buttonCancel)
         self.setLayout(self.layout)
        
@@ -557,8 +576,11 @@ class View(QWidget):
         self.layout.addRow(self.text4,self.le4)
       
         self.buttonSaveInterface = QPushButton("Enregistrer")
+        self.buttonSaveInterface.setIcon(QIcon('Logo\save.svg'))        
         self.buttonCancelInterface = QPushButton("Annuler")
-       
+        self.buttonCancelInterface.setIcon(QIcon('Logo\exit.svg')) 
+        
+ 
         self.layout.addRow(self.buttonSaveInterface, self.buttonCancelInterface)
        
         # Gestion des events
@@ -816,8 +838,10 @@ class View(QWidget):
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonSaveRoute = QPushButton("Ajouter la route")
+        self.buttonSaveRoute.setIcon(QIcon('Logo\plus.svg'))        
         self.buttonCancelRoute = QPushButton("Annuler")
-       
+        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.svg'))
+        
         self.layout.addRow(self.buttonSaveRoute, self.buttonCancelRoute)
         self.setLayout(self.layout)
        
@@ -858,8 +882,10 @@ class View(QWidget):
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonDeleteRoute = QPushButton("Supprimer la route")
+        self.buttonCancelRoute.setIcon(QIcon('Logo\trash.svg'))        
         self.buttonCancelRoute = QPushButton("Annuler")
-       
+        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.svg'))
+        
         self.layout.addRow(self.buttonDeleteRoute, self.buttonCancelRoute)
         self.setLayout(self.layout)
        
