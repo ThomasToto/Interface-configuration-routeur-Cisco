@@ -710,6 +710,18 @@ class View(QWidget):
       
 
     def btn_clickOnRoutage(self, myCtrl, nomRouteur, boutonON, boutonOFF):
+        '''
+        Paramètres :
+            - myCtrl (Controller) : instance de la classe Controller            
+            - nomRouteur (String) : nom du routeur
+            - boutonON (Objet Bouton) : Bouton "Activer routage"
+            - boutonOFF (Objet Bouton) : Bouton "Désactiver routage"
+            
+        But : Activer le routage du routeur
+        
+        Fonctionnement : Appel la fonction sshEnableRoutage pour activer le routage, puis fixe le boutonON
+                         comme désactivé et le boutonOFF comme activé
+        ''' 
         global nomFichier
         
         myCtrl.sshEnableRoutage(nomFichier,nomRouteur)
@@ -718,6 +730,18 @@ class View(QWidget):
 
 
     def btn_clickOffRoutage(self, myCtrl, nomRouteur,boutonON, boutonOFF):
+        '''
+        Paramètres :
+            - myCtrl (Controller) : instance de la classe Controller            
+            - nomRouteur (String) : nom du routeur
+            - boutonON (Objet Bouton) : Bouton "Activer routage"
+            - boutonOFF (Objet Bouton) : Bouton "Désactiver routage"
+            
+        But : Désactiver le routage du routeur
+        
+        Fonctionnement : Appel la fonction sshEnableRoutage pour désactiver le routage, puis fixe le boutonON
+                         comme activé et le boutonOFF comme désactivé
+        ''' 
         global nomFichier
         
         myCtrl.sshDisableRoutage(nomFichier,nomRouteur)
