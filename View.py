@@ -42,36 +42,41 @@ class View(QWidget):
        # Initialisation variable globale
        global nomFichier      
        
+       # Stylesheet
+       self.stylesheet = open('style.css').read()
+       self.setStyleSheet(self.stylesheet)
+       
        # Création layout
        self.layout = QFormLayout()
        
        # Menu bar
        self.menu = QMenuBar()
+       self.menu.setStyleSheet(self.stylesheet)
        self.menuFichier = self.menu.addMenu("Fichier") 
        self.layout.addRow(self.menu)
 
       
        # Création sous menu Ouvrir
-       ouvrirMenu = QAction(QIcon('Logo\open.svg'),'Ouvrir', self)
+       ouvrirMenu = QAction(QIcon('Logo\open.png'),'   Ouvrir', self)
        ouvrirMenu.setShortcut('Ctrl+O')
        ouvrirMenu.triggered.connect(lambda: self.openDb(self.myCtrl))
        self.menuFichier.addAction(ouvrirMenu)
 
        # Création sous menu Enregistrer
-       enregistrerMenu = QAction(QIcon('Logo\save.svg'),'Enregistrer sous', self)
+       enregistrerMenu = QAction(QIcon('Logo\save.png'),'   Enregistrer sous', self)
        enregistrerMenu.setShortcut('Ctrl+S')
        enregistrerMenu.triggered.connect(self.saveDb)
        self.menuFichier.addAction(enregistrerMenu)
 
        # Action sous menu Quitter
-       quitterMenu = QAction(QIcon('Logo\exit.svg'),'Quitter', self)
+       quitterMenu = QAction(QIcon('Logo\exit.png'),'   Quitter', self)
        quitterMenu.setShortcut('Ctrl+Q')
        quitterMenu.triggered.connect(app.quit)
        quitterMenu.triggered.connect(self.close)
        self.menuFichier.addAction(quitterMenu)
        
        # Texte liste routeur
-       self.textList = QLabel("Listes des routeurs :")
+       self.textList = QLabel("\nListes des routeurs :\n")
        self.layout.addRow(self.textList)
        
        # Ajout des checkbox
@@ -83,7 +88,7 @@ class View(QWidget):
                    global compteur
                    if(len(row[0]) != 0) :
                        locals()['self.checkboxRouteur%d' % compteur] = QRadioButton(row[0])
-                       locals()['self.checkboxRouteur%d' % compteur].setIcon(QIcon('Logo\iconRouteur.svg'))
+                       locals()['self.checkboxRouteur%d' % compteur].setStyleSheet(self.stylesheet)
                        self.layout.addWidget(locals()['self.checkboxRouteur%d' % compteur])  
                        
                    compteur += 1
@@ -91,15 +96,24 @@ class View(QWidget):
                    pass
        
        
+
+       
        # Création des boutons        
        self.buttonAdd = QPushButton("Ajouter un routeur")
-       self.buttonAdd.setIcon(QIcon('Logo\plus.svg'))
+       self.buttonAdd.setIcon(QIcon('Logo\plus.png'))
+       self.buttonAdd.setStyleSheet(self.stylesheet)
+       
        self.buttonSelect = QPushButton("Voir le routeur")
-       self.buttonSelect.setIcon(QIcon('Logo\select.svg'))
+       self.buttonSelect.setIcon(QIcon('Logo\select.png'))
+       self.buttonSelect.setStyleSheet(self.stylesheet)
+       
        self.buttonDelete = QPushButton("Supprimer le routeur")
-       self.buttonDelete.setIcon(QIcon('Logo\delete.svg'))
+       self.buttonDelete.setIcon(QIcon('Logo\delete.png'))
+       self.buttonDelete.setStyleSheet(self.stylesheet)
+       
        self.buttonEdit = QPushButton("Modifier le routeur")
-       self.buttonEdit.setIcon(QIcon('Logo\edit.svg'))
+       self.buttonEdit.setIcon(QIcon('Logo\edit.png'))
+       self.buttonEdit.setStyleSheet(self.stylesheet)
 
        # Ajout des widgets au layout et mise en place du layout    
        self.layout.addRow(self.buttonSelect,self.buttonEdit)
@@ -141,6 +155,11 @@ class View(QWidget):
         
         # Héritage - Appel de la classe mère
         super(View, self).__init__(parent)
+        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+       
        
         # Création du layout 
         self.layout = QFormLayout()
@@ -148,24 +167,35 @@ class View(QWidget):
         # Mise en place des widgets
         self.text1 = QLabel()
         self.text1.setText("Nom : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
+        self.le1.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel()
         self.text2.setText("Adresse IP : ")
+        self.text2.setStyleSheet(self.stylesheet)
+        
         self.le2 = QLineEdit()
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
       
         self.text3 = QLabel()
         self.text3.setText(u"Masque de sous réseaux : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonSave = QPushButton("Ajouter le routeur")
-        self.buttonSave.setIcon(QIcon('Logo\plus.svg'))
+        self.buttonSave.setIcon(QIcon('Logo\plus.png'))
+        self.buttonSave.setStyleSheet(self.stylesheet)
+        
         self.buttonCancel = QPushButton("Annuler")
-        self.buttonCancel.setIcon(QIcon('Logo\exit.svg'))
-       
+        self.buttonCancel.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancel.setStyleSheet(self.stylesheet)
        
         # Gestion des events
         self.buttonSave.clicked.connect(lambda: self.btn_clickAddSaveRouteur(myCtrl))
@@ -193,31 +223,47 @@ class View(QWidget):
        
         # Création du layout
         self.layout = QFormLayout() 
+        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
 
         # Mise en place des widgets            
         self.text1 = QLabel()
         self.text1.setText("Nom : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
         self.le1.setText(nomRouteur)
         self.le1.setEnabled(False)
+        self.le1.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel()
         self.text2.setText("Adresse IP : ")
+        self.text2.setStyleSheet(self.stylesheet)       
+        
         self.le2 = QLineEdit()
         self.le2.setText(adresseIP)
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
        
         self.text3 = QLabel()
         self.text3.setText("Masque de sous réseaux : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
         self.le3.setText(masque)
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
       
         self.buttonSaveRouteur = QPushButton("Enregistrer")
-        self.buttonSaveRouteur.setIcon(QIcon('Logo\save.svg'))
+        self.buttonSaveRouteur.setIcon(QIcon('Logo\save.png'))
+        self.buttonSaveRouteur.setStyleSheet(self.stylesheet)
+        
         self.buttonCancelRouteur = QPushButton("Annuler")
-        self.buttonCancelRouteur.setIcon(QIcon('Logo\exit.svg'))       
+        self.buttonCancelRouteur.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancelRouteur.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.buttonSaveRouteur, self.buttonCancelRouteur)
        
         # Gestion des events
@@ -380,29 +426,34 @@ class View(QWidget):
         # Héritage - appel à la classe mère
         super(View, self).__init__(parent)
        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+       
         # Mise en place du layout
         self.layout = QFormLayout()
        
         # Menu Bar
         self.menu = QMenuBar()
+        self.menu.setStyleSheet(self.stylesheet)
         self.menuFichier = self.menu.addMenu("Fichier") 
         self.layout.addRow(self.menu)
 
       
         # Création sous menu Ouvrir
-        ouvrirMenu = QAction(QIcon('open.svg'),'Ouvrir', self)
+        ouvrirMenu = QAction(QIcon('Logo\open.png'),'   Ouvrir', self)
         ouvrirMenu.setShortcut('Ctrl+O')
         ouvrirMenu.triggered.connect(lambda: self.openDb(myCtrl))
         self.menuFichier.addAction(ouvrirMenu)
 
         # Création sous menu Enregistrer
-        enregistrerMenu = QAction(QIcon('save.svg'),'Enregistrer sous', self)
+        enregistrerMenu = QAction(QIcon('Logo\save.png'),'   Enregistrer sous', self)
         enregistrerMenu.setShortcut('Ctrl+S')
         enregistrerMenu.triggered.connect(self.saveDb)
         self.menuFichier.addAction(enregistrerMenu)
 
         # Action sous menu Quitter
-        quitterMenu = QAction(QIcon('exit.svg'),'Quitter', self)
+        quitterMenu = QAction(QIcon('Logo\exit.png'),'   Quitter', self)
         quitterMenu.setShortcut('Ctrl+Q')
         quitterMenu.triggered.connect(app.quit)
         quitterMenu.triggered.connect(self.close)
@@ -410,6 +461,7 @@ class View(QWidget):
        
         # Texte liste interface
         self.textList = QLabel("Listes des interfaces :")
+        self.textList.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.textList)
        
         # Ajout des checkbox 
@@ -423,6 +475,7 @@ class View(QWidget):
                         for i in range(3,len(ligneCourante),4):
                             if(len(ligneCourante.split(",")[i].strip()) != 0) :
                                 locals()['self.checkboxInterface%d' % compteur] = QRadioButton(ligneCourante.split(",")[i])
+                                locals()['self.checkboxInterface%d' % compteur].setStyleSheet(self.stylesheet)
                                 self.layout.addWidget(locals()['self.checkboxInterface%d' % compteur])                       
                         compteur += 1 
                     except IndexError:
@@ -432,25 +485,47 @@ class View(QWidget):
         # Mise en place de la table de routage
         self.tableRoutage = QTextEdit()
         route = myCtrl.sshShowRoute(nomFichier,nomRouteur)
+        self.tableRoutage.setStyleSheet(self.stylesheet)
         self.tableRoutage.setText("Table de routage :\n" +route)
         self.tableRoutage.setEnabled(False)
+        self.tableRoutage.setStyleSheet(self.stylesheet)
         
         # Création des boutons
         self.buttonDeleteRoute = QPushButton("Supprimer une route")
-        self.buttonDeleteRoute.setIcon(QIcon('Logo\delete.svg'))   
+        self.buttonDeleteRoute.setIcon(QIcon('Logo\delete.png'))   
+        self.buttonDeleteRoute.setStyleSheet(self.stylesheet)
+        
         self.buttonAddRoute = QPushButton("Ajouter une route")
-        self.buttonAddRoute.setIcon(QIcon('Logo\plus.svg'))
+        self.buttonAddRoute.setIcon(QIcon('Logo\plus.png'))
+        self.buttonAddRoute.setStyleSheet(self.stylesheet)
+        
         self.buttonAdd = QPushButton("Ajouter une interface")
-        self.buttonAdd.setIcon(QIcon('Logo\plus.svg'))
+        self.buttonAdd.setIcon(QIcon('Logo\plus.png'))
+        self.buttonAdd.setStyleSheet(self.stylesheet)
+        
         self.buttonSelect = QPushButton("Voir l'interface")
-        self.buttonSelect.setIcon(QIcon('Logo\select.svg'))
+        self.buttonSelect.setIcon(QIcon('Logo\select.png'))
+        self.buttonSelect.setStyleSheet(self.stylesheet)
+        
         self.buttonDelete = QPushButton("Supprimer l'interface")
-        self.buttonDelete.setIcon(QIcon('Logo\delete.svg'))
+        self.buttonDelete.setIcon(QIcon('Logo\delete.png'))
+        self.buttonDelete.setStyleSheet(self.stylesheet)
+        
         self.buttonBackHome = QPushButton("Revenir à l'accueil")
-        self.buttonBackHome.setIcon(QIcon('Logo\home.svg'))
+        self.buttonBackHome.setIcon(QIcon('Logo\home.png'))
+        self.buttonBackHome.setStyleSheet(self.stylesheet)
+        
+        self.buttonOnRoutage= QPushButton("Activer le routage")
+        self.buttonOnRoutage.setIcon(QIcon('Logo\ON.png'))
+        self.buttonOnRoutage.setStyleSheet(self.stylesheet)
+        
+        self.buttonOffRoutage = QPushButton("Désactiver le routage")
+        self.buttonOffRoutage.setIcon(QIcon('Logo\OFF.png'))
+        self.buttonOffRoutage.setStyleSheet(self.stylesheet)
 
         # Ajout des widgets au layout
         self.layout.addRow(self.tableRoutage)
+        self.layout.addRow(self.buttonOnRoutage,self.buttonOffRoutage) 
         self.layout.addRow(self.buttonAddRoute,self.buttonDeleteRoute) 
         self.layout.addRow(self.buttonSelect)
         self.layout.addRow(self.buttonAdd,self.buttonDelete)
@@ -471,6 +546,8 @@ class View(QWidget):
         self.buttonBackHome.clicked.connect(lambda: self.btn_clickBackHome(myCtrl))
         self.buttonAddRoute.clicked.connect(lambda: self.btn_clickShowVueAddRoute(myCtrl,nomRouteur))
         self.buttonDeleteRoute.clicked.connect(lambda: self.btn_clickShowVueDeleteRoute(myCtrl,nomRouteur))
+        self.buttonOnRoutage.clicked.connect(lambda: self.btn_clickOnRoutage(myCtrl,nomRouteur,self.buttonOnRoutage,self.buttonOffRoutage))
+        self.buttonOffRoutage.clicked.connect(lambda: self.btn_clickOffRoutage(myCtrl,nomRouteur,self.buttonOnRoutage,self.buttonOffRoutage))
        
         self.setWindowTitle("Choix interface du routeur : " + nomRouteur)
         self.setGeometry(500, 200, 500, 400)
@@ -490,34 +567,53 @@ class View(QWidget):
         # Héritage - appel à la classe mère
         super(View, self).__init__(parent)		
        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+        
         # Mise en place du layout
         self.layout = QFormLayout()
 
         # Mise en place des widgets 
         self.text1 = QLabel()
         self.text1.setText("Nom : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
+        self.le1.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel()
         self.text2.setText("Adresse IP : ")
+        self.text2.setStyleSheet(self.stylesheet)
+        
         self.le2 = QLineEdit()
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
       
         self.text3 = QLabel()
         self.text3.setText("Masque de sous réseaux : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
       
         self.text4 = QLabel()
         self.text4.setText("Passerelle par défaut : ")
+        self.text4.setStyleSheet(self.stylesheet)
+        
         self.le4 = QLineEdit()
+        self.le4.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text4,self.le4)
        
         self.buttonSave = QPushButton("Ajouter l'interface")
-        self.buttonSave.setIcon(QIcon('Logo\plus.svg'))        
+        self.buttonSave.setIcon(QIcon('Logo\plus.png'))    
+        self.buttonSave.setStyleSheet(self.stylesheet)
+        
         self.buttonCancel = QPushButton("Annuler")
-        self.buttonCancel.setIcon(QIcon('Logo\exit.svg'))
+        self.buttonCancel.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancel.setStyleSheet(self.stylesheet)
         
         self.layout.addRow(self.buttonSave, self.buttonCancel)
         self.setLayout(self.layout)
@@ -544,41 +640,61 @@ class View(QWidget):
         '''      
         
         # Héritage - appel à la classe mère
-        super(View, self).__init__(parent)		
-       
+        super(View, self).__init__(parent)	
+        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+        
         # Création du layout
         self.layout = QFormLayout()  
 
         # Mise en place des widgets
         self.text1 = QLabel()
         self.text1.setText("Nom : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
         self.le1.setText(nomInterface)
         self.le1.setEnabled(False)
+        self.le1.setStyleSheet(self.stylesheet)
+        
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel()
         self.text2.setText("Adresse IP : ")
+        self.text2.setStyleSheet(self.stylesheet)
+        
         self.le2 = QLineEdit()
         self.le2.setText(adresseIP)
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
        
         self.text3 = QLabel()
         self.text3.setText("Masque de sous réseaux : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
         self.le3.setText(masque)
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
       
         self.text4 = QLabel()
         self.text4.setText("Passerelle par défaut : ")
+        self.text4.setStyleSheet(self.stylesheet)
+        
         self.le4 = QLineEdit()
         self.le4.setText(passerelleDefaut)
+        self.le4.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text4,self.le4)
       
         self.buttonSaveInterface = QPushButton("Enregistrer")
-        self.buttonSaveInterface.setIcon(QIcon('Logo\save.svg'))        
+        self.buttonSaveInterface.setIcon(QIcon('Logo\save.png'))   
+        self.buttonSaveInterface.setStyleSheet(self.stylesheet)
+        
         self.buttonCancelInterface = QPushButton("Annuler")
-        self.buttonCancelInterface.setIcon(QIcon('Logo\exit.svg')) 
+        self.buttonCancelInterface.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancelInterface.setStyleSheet(self.stylesheet)
         
  
         self.layout.addRow(self.buttonSaveInterface, self.buttonCancelInterface)
@@ -592,6 +708,22 @@ class View(QWidget):
         self.setWindowTitle("Configuration de l'interface : " + nomInterface)
         self.show()
       
+
+    def btn_clickOnRoutage(self, myCtrl, nomRouteur, boutonON, boutonOFF):
+        global nomFichier
+        
+        myCtrl.sshEnableRoutage(nomFichier,nomRouteur)
+        boutonON.setEnabled(False)
+        boutonOFF.setEnabled(True)
+
+
+    def btn_clickOffRoutage(self, myCtrl, nomRouteur,boutonON, boutonOFF):
+        global nomFichier
+        
+        myCtrl.sshDisableRoutage(nomFichier,nomRouteur)
+        boutonON.setEnabled(True)
+        boutonOFF.setEnabled(False)
+
 
     def btn_clickShowVueAddRoute(self,myCtrl,nomRouteur):
         '''
@@ -821,26 +953,42 @@ class View(QWidget):
         # Héritage - appel à la classe mère
         super(View, self).__init__(parent)		
        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+        
         # Mise en place du layout
         self.layout = QFormLayout()
 
         # Mise en place des widgets 
         self.text1 = QLabel("Destination : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
+        self.le1.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel("Masque : ")
+        self.text2.setStyleSheet(self.stylesheet)
+        
         self.le2 = QLineEdit()
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
       
         self.text3 = QLabel("Via : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonSaveRoute = QPushButton("Ajouter la route")
-        self.buttonSaveRoute.setIcon(QIcon('Logo\plus.svg'))        
+        self.buttonSaveRoute.setIcon(QIcon('Logo\plus.png'))  
+        self.buttonSaveRoute.setStyleSheet(self.stylesheet)
+        
         self.buttonCancelRoute = QPushButton("Annuler")
-        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.svg'))
+        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancelRoute.setStyleSheet(self.stylesheet)
         
         self.layout.addRow(self.buttonSaveRoute, self.buttonCancelRoute)
         self.setLayout(self.layout)
@@ -850,7 +998,7 @@ class View(QWidget):
         self.buttonCancelRoute.clicked.connect(lambda: self.btn_clickCancelRoute(myCtrl,nomRouteur))
        
        
-        self.setWindowTitle("Ajouter une interface")
+        self.setWindowTitle("Ajouter une route")
         self.show()
 
 
@@ -863,28 +1011,44 @@ class View(QWidget):
         But : Fonction qui met en place la vue permettant de supprimer une route.
         '''        
         # Héritage - appel à la classe mère
-        super(View, self).__init__(parent)		
-       
+        super(View, self).__init__(parent)	
+        
+        # Stylesheet
+        self.stylesheet = open('style.css').read()
+        self.setStyleSheet(self.stylesheet)
+        
         # Mise en place du layout
         self.layout = QFormLayout()
 
         # Mise en place des widgets 
         self.text1 = QLabel("Destination : ")
+        self.text1.setStyleSheet(self.stylesheet)
+        
         self.le1 = QLineEdit()
+        self.le1.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text1,self.le1)
       
         self.text2 = QLabel("Masque : ")
+        self.text2.setStyleSheet(self.stylesheet)
+        
         self.le2 = QLineEdit()
+        self.le2.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text2,self.le2)
       
         self.text3 = QLabel("Via : ")
+        self.text3.setStyleSheet(self.stylesheet)
+        
         self.le3 = QLineEdit()
+        self.le3.setStyleSheet(self.stylesheet)
         self.layout.addRow(self.text3,self.le3)
             
         self.buttonDeleteRoute = QPushButton("Supprimer la route")
-        self.buttonCancelRoute.setIcon(QIcon('Logo\trash.svg'))        
+        self.buttonDeleteRoute.setIcon(QIcon('Logo\delete.png'))    
+        self.buttonDeleteRoute.setStyleSheet(self.stylesheet)
+        
         self.buttonCancelRoute = QPushButton("Annuler")
-        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.svg'))
+        self.buttonCancelRoute.setIcon(QIcon('Logo\exit.png'))
+        self.buttonCancelRoute.setStyleSheet(self.stylesheet)
         
         self.layout.addRow(self.buttonDeleteRoute, self.buttonCancelRoute)
         self.setLayout(self.layout)
@@ -894,7 +1058,7 @@ class View(QWidget):
         self.buttonCancelRoute.clicked.connect(lambda: self.btn_clickCancelRoute(myCtrl,nomRouteur))
        
        
-        self.setWindowTitle("Ajouter une interface")
+        self.setWindowTitle("Supprimer une route")
         self.show()
         
     def btn_clickCancelRoute(self,myCtrl,nomRouteur):  
