@@ -44,7 +44,7 @@ class Model:
         Fonctionnement : Ecrire dans le fichier les infos du nouveau routeur.
         '''        
         with open(nomFichier, 'a') as f:
-           f.write(text1 + "," + text2 + "," + text3 + "\n")
+           f.write(text1 + "," + text2 + "," + text3 + "," + "eth0" + "," + text2 + "," + text3 + "," + text2 + "," + "\n")
  
            
     def editSaveRouteur(self,nomFichier,nomRouteur,adresseIP,masque):

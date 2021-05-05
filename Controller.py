@@ -79,7 +79,7 @@ class Controller:
         self.myModel.deleteInterface(nomFichier,nomRouteur,items)
         
         
-    def addSaveInterface(self,nomFichier,nomRouteur,nomInterface,masque,adresseIP,passerelleDefaut):
+    def addSaveInterface(self,nomFichier,nomRouteur,nomInterface,adresseIP,masque,passerelleDefaut):
         '''
         Paramètres : 
             - nomFichier (String) : nom du fichier où les informations seront enregistrées
